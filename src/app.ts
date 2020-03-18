@@ -15,3 +15,5 @@ app.listen(port, err => {
   }
   console.log("server is listening");
 });
+
+export default app;
