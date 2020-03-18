@@ -11,8 +11,8 @@ app.get("/", (req, res, next) => res.json({
 }));
 app.listen(port, err => {
     if (err) {
-        return console.log(err);
+        console.log(err);
     }
-    return console.log("server is listening");
+    console.log("server is listening");
 });
 //# sourceMappingURL=app.js.map

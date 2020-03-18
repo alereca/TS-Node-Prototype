@@ -11,7 +11,7 @@ app.get("/", (req, res, next) =>
 
 app.listen(port, err => {
   if (err) {
-    return console.log(err);
+    console.log(err);
   }
-  return console.log("server is listening");
+  console.log("server is listening");
 });
