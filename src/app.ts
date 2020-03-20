@@ -1,9 +1,10 @@
 import express from "express";
+import { createConnection } from "typeorm";
+import feedRoutes from "./routes/feed";
 
 const app = express();
+createConnection();
 const port = 3000;
-
-const feedRoutes = require("./Routes/feed");
 
 app.use("/feed", feedRoutes);
 
