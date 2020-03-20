@@ -3,4 +3,9 @@ export declare class Post {
     title: string;
     imageUrl: string;
     content: string;
+    constructor(params: {
+        title: string;
+        imageUrl: string;
+        content: string;
+    });
 }
