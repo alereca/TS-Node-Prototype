@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node ./dist/app.js\"",
     "start": "tsc && node dist/app.js",
-    "test": "npm run test"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
