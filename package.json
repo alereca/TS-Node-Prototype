@@ -23,7 +23,8 @@
     "dev": "tsc-watch --onSuccess \"node ./dist/app.js\"",
     "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/app.ts",
     "prod": "tsc && node dist/app.js",
-    "test": "jest"
+    "test": "jest",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },
   "keywords": [],
   "author": "",
