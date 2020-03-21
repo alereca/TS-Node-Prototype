@@ -9,6 +9,7 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.1.1",
     "ts-jest": "^25.2.1",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tsc-watch": "^4.2.3",
     "typeorm": "^0.2.24"
   },
@@ -20,7 +21,8 @@
   },
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node ./dist/app.js\"",
-    "start": "tsc && node dist/app.js",
+    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/app.ts",
+    "prod": "tsc && node dist/app.js",
     "test": "jest"
   },
   "keywords": [],
