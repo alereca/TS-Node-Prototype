@@ -1,4 +1,5 @@
-module.export = {
+module.exports = {
+  testEnvironment: "node",
   globals: {
     "ts-jest": {
       tsConfigFIle: "tsconfig.json"
@@ -8,9 +9,5 @@ module.export = {
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
-  testMatch: ["**/test/**/*.test.(ts|js"],
-  testEnvironment: "node"
+  testMatch: ["**/test/**/*.test.(ts|js)"]
 };
-
-// It's a sequence, first code is compiled from ts to js, then the test are executed
-// in a node environment
