@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner, getRepository } from "typeorm";
-import { Post } from "../../src/entities/Post"
+import { Post } from "../../src/entities/feed/post.model"
 
 export class SeedInMemoryTestDb1584749320190 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getRepository } from "typeorm";
-import { Post } from "../entities/Post";
+import { Post } from "../../entities/feed/post.model";
 
 export const getPosts = async (
   req: Request,
