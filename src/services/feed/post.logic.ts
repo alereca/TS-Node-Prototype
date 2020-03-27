@@ -1,7 +1,7 @@
 import { getFunc } from "../../utils/common/common.query.interface";
-import { Post } from "../../entities/feed/post.model";
+import { PostShowDto } from "../../entities/feed/post.show.dto";
 
 export const getPostsLogicFactory = (
-  getPosts: getFunc<Post>
+  getPosts: getFunc<PostShowDto>
 ) => () => getPosts();
 

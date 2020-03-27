@@ -2,6 +2,7 @@ import app from "../../../src/server";
 import request from "supertest";
 import { createConnection, getConnection } from "typeorm";
 import { Post } from "../../../src/entities/feed/post.model";
+import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
 
 const createDb = () =>
   createConnection({
