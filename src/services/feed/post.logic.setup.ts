@@ -1,4 +1,4 @@
 import {getPostsLogicFactory} from "./post.logic";
-import { getQuery } from "../../utils/common/common.query";
+import { getPostsQuery } from "../../utils/feed/post.query";
 
-export const getPostsLogic = getPostsLogicFactory(getQuery);
+export const getPostsLogic = getPostsLogicFactory(getPostsQuery);
