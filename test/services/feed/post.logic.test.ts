@@ -13,7 +13,7 @@ describe("get post logic", () => {
         content: "test content"
       })
     ];
-    const getPostsQuery: getFunc<PostShowDto> = () =>
+    const getPostsQuery: getFunc = () =>
       new Promise(resolve => resolve(list));
     //Act
     const result = await getPostsLogicFactory(getPostsQuery)();

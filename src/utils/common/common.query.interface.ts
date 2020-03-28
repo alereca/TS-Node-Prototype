@@ -1,1 +1,5 @@
-export type getFunc<T> = () => Promise<Array<T>>;
+export type ObjectType<T> = {new(): T} | Function;
+
+export type getFunc = <T>(
+  type: ObjectType<T>
+) => Promise<Array<T>>;
