@@ -16,7 +16,7 @@ const createDb = () =>
   });
 
 beforeEach(async () => {
-  var connection = await createDb();
+  const connection = await createDb();
   await connection.runMigrations();
 });
 
