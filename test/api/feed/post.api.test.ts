@@ -29,6 +29,18 @@ describe("Get posts", () => {
   });
 });
 
+describe("Create post", () => {
+  it("should save the resource and return a successful message including the saved objects", async () => {
+    const res = await request(app).post("/feed/post");
+
+    expect(res.status).toEqual(201);
+    expect(res.body).toHaveProperty("message");
+    expect(res.body.message).toEqual("resource created");
+    expect(res.body).toHaveProperty("post");
+    expect(getConnection().getRepository(Post).findByIds(res.body.post.id)).toBeDefined();
+  });
+});
+
 afterEach(() => {
   return getConnection().close();
 });
