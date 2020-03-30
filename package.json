@@ -5,7 +5,7 @@
   "main": "dist/app.js",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "@types/joi": "^14.3.4",
+    "@types/hapi__joi": "^16.0.12",
     "@types/supertest": "^2.0.8",
     "express": "^4.17.1",
     "jest": "^25.1.0",

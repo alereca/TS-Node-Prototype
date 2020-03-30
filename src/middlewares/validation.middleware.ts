@@ -1,12 +1,11 @@
-import { ObjectSchema, validate } from "joi";
+import { ObjectSchema } from "@hapi/joi";
 import { Request, Response, NextFunction } from "express";
 
-export const validateWith = (schema: ObjectSchema) => (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { value, error } = validate(req.body, schema);
+export const validateWith = (
+  schema: ObjectSchema,
+  property: "body" | "query" | "route"
+) => (req: Request, res: Response, next: NextFunction) => {
+  const { error, value } = schema.validate(req.body);
 
   if (error) {
     res.status(430).json({

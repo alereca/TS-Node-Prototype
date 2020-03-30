@@ -17,6 +17,7 @@ export const createPost = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.body);
   return res.status(201).json({
     message: "resource created",
     post: new PostShowDto({
