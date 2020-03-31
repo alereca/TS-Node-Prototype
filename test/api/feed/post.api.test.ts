@@ -51,6 +51,23 @@ describe("Create post", () => {
         .findByIds(res.body.post.id)
     ).toBeDefined();
   });
+
+  it("should return a validation error if some input in the request body is invalid", async () => {
+    const res = await request(app)
+      .post("/feed/post")
+      .send(
+        new PostCreateDto({
+          title: "fo",
+          imageUrl: "four.jpg",
+          content: "four"
+        })
+      );
+
+      expect(res.status).toEqual(430);
+      expect(res.body.status).toEqual("failed");
+      expect(res.body.error).toHaveProperty("original");
+      expect(res.body.error.details).toHaveLength(2);
+  });
 });
 
 afterEach(() => {
