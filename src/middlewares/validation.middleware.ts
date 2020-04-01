@@ -1,28 +1,24 @@
-import { ObjectSchema, ValidationOptions } from "@hapi/joi";
+import { validate } from "class-validator";
 import { Request, Response, NextFunction } from "express";
+import { InputDto } from "../entities/input.dto";
 import { PostCreateDto } from "../entities/feed/post.create.dto";
 
-export const validateWith = (
-  schema: ObjectSchema,
-  property: "body" | "query" | "route"
-) => (req: Request, res: Response, next: NextFunction) => {
-  const { error, value } = schema.validate(req.body, {
-    abortEarly: false,
-    allowUnknown: true,
-    stripUnknown: true
+export const validateWith = <T>(property: "body" | "query" | "route") => (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  validate(new PostCreateDto(req.body)).then(err => {
+    if (err.length == 0) {
+      next();
+    } else {
+      res.status(430).json({
+        status: "failed",
+        error: {
+          original: new PostCreateDto(req.body),
+          details: err.map(val => ({ [val.property]: val.constraints }))
+        }
+      });
+    }
   });
-
-  if (error) {
-    res.status(430).json({
-      status: "failed",
-      error: {
-        original: value,
-        details: error.details.map(({ message }) => ({
-          message: message.replace(/['"]/g, "")
-        }))
-      }
-    });
-  } else {
-    next();
-  }
 };
