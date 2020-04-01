@@ -1,6 +1,5 @@
 import { validate } from "class-validator";
 import { Request, Response, NextFunction } from "express";
-import { PostCreateDto } from "../entities/feed/post.create.dto";
 
 export const validateWith = <T>(
   type: { new (...args: any[]): T },
