@@ -1,17 +1,16 @@
-import {Length} from "class-validator"
-import { InputDto } from "../input.dto";
+import { Length, IsNotEmpty } from "class-validator";
 
-export class PostCreateDto extends InputDto{
+export class PostCreateDto {
   @Length(3)
+  @IsNotEmpty()
   public readonly title: string;
+  @IsNotEmpty()
   public readonly imageUrl: string;
   @Length(6)
+  @IsNotEmpty()
   public readonly content: string;
 
-  constructor(params: { title: string; imageUrl: string; content: string }) {
-    super();
-    this.title = params.title;
-    this.imageUrl = params.imageUrl;
-    this.content = params.content;
+  constructor(params?: Partial<PostCreateDto>) {
+    Object.assign(this, params);
   }
 }

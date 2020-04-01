@@ -6,6 +6,6 @@ import { PostCreateDto } from "../../entities/feed/post.create.dto";
 const router = Router();
 
 router.get("/posts", getPosts);
-router.post("/post", [validateWith<PostCreateDto>("body")], createPost);
+router.post("/post", [validateWith(PostCreateDto ,"body")], createPost);
 
 export default router;
