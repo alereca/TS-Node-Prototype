@@ -7,7 +7,7 @@ export const validateWith = <T>(
 ) => (req: Request, res: Response, next: NextFunction) => {
   const value = new type(req[property]);
   validate(value).then(err => {
-    if (err.length == 0) {
+    if (err.length === 0) {
       next();
     } else {
       res.status(430).json({
