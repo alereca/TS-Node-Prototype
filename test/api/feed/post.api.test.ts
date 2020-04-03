@@ -58,12 +58,12 @@ describe("Create post", () => {
   it("should return a validation error if some input in the request body is invalid", async () => {
     await request(app)
       .post("/feed/post")
-      .send(new PostCreateDto({ title: "fo", content: "four                   " }))
+      .send(new PostCreateDto({ title: "fo", content: "four                   ", imageUrl: "<s></s>" }))
       .then(res => {
         expect(res.status).toEqual(430);
         expect(res.body.status).toEqual("failed");
         expect(res.body.error).toHaveProperty("original");
-        expect(res.body.error.details).toHaveLength(3);
+        expect(res.body.error.details).toHaveLength(2);
       });
   });
 });
