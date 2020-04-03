@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "dependencies": {
+    "@neuralegion/class-sanitizer": "^0.3.2",
     "@types/supertest": "^2.0.8",
     "class-validator": "^0.11.1",
     "express": "^4.17.1",
@@ -26,7 +27,7 @@
     "dev": "tsc-watch --onSuccess \"node ./dist/start.js\"",
     "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/start.ts",
     "prod": "tsc && node dist/start.js",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },
