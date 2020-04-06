@@ -47,11 +47,6 @@ describe("Create post", () => {
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
         expect(res.body).toHaveProperty("post");
-        expect(
-          getConnection()
-            .getRepository(Post)
-            .findByIds(res.body.post.id)
-        ).toBeDefined();
       });
   });
 
