@@ -16,13 +16,13 @@ export const createPost = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<Response<any>> => {
   console.log(req.body);
   return res.status(201).json({
     message: "resource created",
     post: new PostShowDto({
       title: "four",
-      content: "four content"
-    })
+      content: "four content",
+    }),
   });
 };

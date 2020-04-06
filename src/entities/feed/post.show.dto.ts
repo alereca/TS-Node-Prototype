@@ -2,7 +2,8 @@ export class PostShowDto {
   public readonly title: string;
   public readonly content: string;
 
-  constructor(params?: Partial<PostShowDto>) {
-    Object.assign(this, params);
+  constructor(params: PostShowDto) {
+    this.title = params.title;
+    this.content = params.content;
   }
 }

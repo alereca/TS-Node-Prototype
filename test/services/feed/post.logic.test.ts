@@ -25,6 +25,7 @@ describe("get post logic", () => {
     //Act
     await getPostsLogicFactory(getPostsQuery)().then((posts) => {
       expect(posts).toHaveLength(2);
+      expect(posts[0]).not.toHaveProperty("id");
     });
   });
 });

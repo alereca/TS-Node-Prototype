@@ -3,6 +3,7 @@ import request from "supertest";
 import { createConnection, getConnection } from "typeorm";
 import { Post } from "../../../src/entities/feed/post.model";
 import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
+import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
 
 const createDb = () =>
   createConnection({
