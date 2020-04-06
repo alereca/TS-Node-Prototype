@@ -6,7 +6,7 @@ import { PostShowDto } from "../../entities/feed/post.show.dto";
 export const getPosts = async (
   req: Request,
   res: Response
-): Promise<Response<Array<Post>>> => {
+): Promise<Response<Post[]>> => {
   const posts = await getPostsLogic();
 
   return res.status(200).json(posts);
@@ -16,15 +16,13 @@ export const createPost = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<Response<any>> => {
   console.log(req.body);
   return res.status(201).json({
     message: "resource created",
     post: new PostShowDto({
-      id: 14,
       title: "four",
-      imageUrl: "four.jpg",
-      content: "four content"
-    })
+      content: "four content",
+    }),
   });
 };

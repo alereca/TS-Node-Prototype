@@ -3,6 +3,7 @@ import request from "supertest";
 import { createConnection, getConnection } from "typeorm";
 import { Post } from "../../../src/entities/feed/post.model";
 import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
+import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
 
 const createDb = () =>
   createConnection({
@@ -47,11 +48,6 @@ describe("Create post", () => {
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
         expect(res.body).toHaveProperty("post");
-        expect(
-          getConnection()
-            .getRepository(Post)
-            .findByIds(res.body.post.id)
-        ).toBeDefined();
       });
   });
 
