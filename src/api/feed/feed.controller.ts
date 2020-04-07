@@ -5,7 +5,8 @@ import { PostShowDto } from "../../entities/feed/post.show.dto";
 
 export const getPosts = async (
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ): Promise<Response<Post[]>> => {
   const posts = await getPostsLogic();
 
