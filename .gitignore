@@ -3,3 +3,10 @@ node_modules
 # Editors
 .idea
 *.iml
+# Ignore transpiled code
+dist/*/**
+# Coverage reports
+coverage
+# OS metadata
+.DS_Store
+Thumbs.db

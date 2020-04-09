@@ -17,7 +17,7 @@ describe("get post logic", () => {
         title: "test2",
         imageUrl: "test2.jpg",
         content: "test2 content",
-      }),
+      })
     ];
     const getPostsQuery = jest.fn().mockReturnValue(
       new Promise<Post[]>((resolve) => resolve(list))
