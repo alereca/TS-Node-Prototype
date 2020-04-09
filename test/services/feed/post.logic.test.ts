@@ -1,6 +1,5 @@
 import { getPostsLogicFactory } from "../../../src/services/feed/post.logic";
 import { Post } from "../../../src/entities/feed/post.model";
-import {} from "ts-jest"
 
 describe("get post logic", () => {
   it("should return a list of posts dtos", async () => {
@@ -17,7 +16,7 @@ describe("get post logic", () => {
         title: "test2",
         imageUrl: "test2.jpg",
         content: "test2 content",
-      })
+      }),
     ];
     const getPostsQuery = jest.fn().mockReturnValue(
       new Promise<Post[]>((resolve) => resolve(list))
