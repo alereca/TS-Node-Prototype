@@ -4,7 +4,7 @@ node_modules
 .idea
 *.iml
 # Ignore transpiled code
-dist/*/**
+dist/
 # Coverage reports
 coverage
 # OS metadata
