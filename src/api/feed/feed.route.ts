@@ -7,6 +7,10 @@ import { sanitizeWith } from "../../middlewares/sanitization.middleware";
 const router = Router();
 
 router.get("/posts", getPosts);
-router.post("/post", [sanitizeWith(PostCreateDto), validateWith(PostCreateDto, "body")], createPost);
+router.post(
+  "/post",
+  [sanitizeWith(PostCreateDto), validateWith(PostCreateDto, "body")],
+  createPost,
+);
 
 export default router;

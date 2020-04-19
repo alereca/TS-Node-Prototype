@@ -1,9 +1,9 @@
 export class PostShowDto {
-    public readonly title: string;
-    public readonly content: string;
+  public readonly title: string;
+  public readonly content: string;
 
-    constructor(params: PostShowDto) {
-        this.title = params.title;
-        this.content = params.content;
-    }
+  constructor(params: PostShowDto) {
+    this.title = params.title;
+    this.content = params.content;
+  }
 }
