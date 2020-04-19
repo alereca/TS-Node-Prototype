@@ -32,7 +32,7 @@
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node ./dist/start.js\"",
     "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/start.ts",
-    "prod": "tsc --noEmit && eslint '*/**/*.ts' --quiet --fix && node dist/start.js",
+    "lint": "tsc --noEmit && eslint '*/**/*.{ts,js}' --quiet --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"

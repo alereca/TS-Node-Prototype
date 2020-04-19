@@ -1,1 +1,1 @@
-export type getFunc = <T>(type: {new (...args: any[]): T}) => Promise<T[]>;
+export type getFunc = <T>(type: { new (...args: any[]): T }) => Promise<T[]>;
