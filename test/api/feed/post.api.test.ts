@@ -1,13 +1,11 @@
 import app from "../../../src/server";
 import request from "supertest";
-import { createConnection, getConnection } from "typeorm";
+import { createConnection, getConnection, Connection } from "typeorm";
 import { Post } from "../../../src/entities/feed/post.model";
-import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
-import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
 import { User } from "../../../src/entities/user/user.model";
 import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
 
-const createDb = () =>
+const createDb = (): Promise<Connection> =>
   createConnection({
     type: "sqlite",
     database: ":memory:",
@@ -44,6 +42,7 @@ describe("Create post", () => {
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
         expect(res.body).toHaveProperty("post");
+        expect(res.body.post).toHaveProperty("user");
       });
   });
 

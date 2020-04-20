@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Post } from "../../entities/feed/post.model";
 import { getPostsLogic } from "../../services/feed/post.logic.setup";
 import { PostShowDto } from "../../entities/feed/post.show.dto";
+import { UserShowDto } from "../../entities/user/user.show.dto";
 
 export const getPosts = async (
   req: Request,
@@ -24,6 +25,10 @@ export const createPost = async (
     post: new PostShowDto({
       title: "four",
       content: "four content",
+      user: new UserShowDto({
+        name: "sbn",
+        email: "sbn@mail.com",
+      }),
     }),
   });
 };
