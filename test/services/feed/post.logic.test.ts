@@ -19,7 +19,7 @@ describe("get post logic", () => {
       }),
     ];
     const getPostsQuery = jest.fn().mockReturnValue(
-      new Promise<Post[]>((resolve) => resolve(list))
+      new Promise<Post[]>((resolve) => resolve(list)),
     );
     //Act
     await getPostsLogicFactory(getPostsQuery)().then((posts) => {

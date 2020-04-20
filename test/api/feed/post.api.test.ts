@@ -13,7 +13,7 @@ const createDb = () =>
     entities: [Post],
     synchronize: true,
     logging: true,
-    migrations: ["test/migrations/**/*.ts"]
+    migrations: ["test/migrations/**/*.ts"],
   });
 
 beforeEach(async () => {
@@ -25,7 +25,7 @@ describe("Get posts", () => {
   it("should get every posts in db", async () => {
     await request(app)
       .get("/feed/posts")
-      .then(res => {
+      .then((res) => {
         expect(res.status).toEqual(200);
         expect(res.body).toHaveLength(3);
       });
@@ -40,10 +40,10 @@ describe("Create post", () => {
         new PostCreateDto({
           title: "four",
           imageUrl: "four.jpg",
-          content: "four content"
-        })
+          content: "four content",
+        }),
       )
-      .then(res => {
+      .then((res) => {
         expect(res.status).toEqual(201);
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
@@ -54,8 +54,14 @@ describe("Create post", () => {
   it("should return a validation error if some input in the request body is invalid", async () => {
     await request(app)
       .post("/feed/post")
-      .send(new PostCreateDto({ title: "fo", content: "four                   ", imageUrl: "<s></s>" }))
-      .then(res => {
+      .send(
+        new PostCreateDto({
+          title: "fo",
+          content: "four                   ",
+          imageUrl: "<s></s>",
+        }),
+      )
+      .then((res) => {
         expect(res.status).toEqual(430);
         expect(res.body.status).toEqual("failed");
         expect(res.body.error).toHaveProperty("original");

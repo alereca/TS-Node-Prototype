@@ -9,18 +9,18 @@ export class SeedDb1584749320190 implements MigrationInterface {
       postRepository.create({
         title: "one",
         imageUrl: "one.jpg",
-        content: "one content"
+        content: "one content",
       }),
       postRepository.create({
         title: "two",
         imageUrl: "two.jpg",
-        content: "two content"
+        content: "two content",
       }),
       postRepository.create({
         title: "three",
         imageUrl: "three.jpg",
-        content: "three content"
-      })
+        content: "three content",
+      }),
     );
 
     await postRepository.save(posts);
@@ -33,18 +33,18 @@ export class SeedDb1584749320190 implements MigrationInterface {
       postRepository.create({
         title: "one",
         imageUrl: "one.jpg",
-        content: "one content"
+        content: "one content",
       }),
       postRepository.create({
         title: "two",
         imageUrl: "two.jpg",
-        content: "two content"
+        content: "two content",
       }),
       postRepository.create({
         title: "three",
         imageUrl: "three.jpg",
-        content: "three content"
-      })
+        content: "three content",
+      }),
     );
 
     await postRepository.remove(posts);

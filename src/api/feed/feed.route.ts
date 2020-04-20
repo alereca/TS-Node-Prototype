@@ -10,7 +10,7 @@ router.get("/posts", getPosts);
 router.post(
   "/post",
   [sanitizeWith(PostCreateDto), validateWith(PostCreateDto, "body")],
-  createPost
+  createPost,
 );
 
 export default router;
