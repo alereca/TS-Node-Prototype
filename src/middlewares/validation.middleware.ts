@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from "express";
 export const validateWith = <T>(
   type: { new (...args: any[]): T },
   property: "body" | "query" | "route",
-) => (req: Request, res: Response, next: NextFunction) => {
+) => (req: Request, res: Response, next: NextFunction): void => {
   const value = new type(req[property]);
   validate(value).then((err) => {
     if (err.length === 0) {

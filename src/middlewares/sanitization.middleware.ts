@@ -5,7 +5,7 @@ export const sanitizeWith = <T>(type: { new (...args: any[]): T }) => (
   req: Request,
   res: Response,
   next: NextFunction,
-) => {
+): void => {
   const body = new type(req.body);
   sanitize(body);
 
