@@ -10,12 +10,14 @@ describe("get post logic", () => {
         title: "test",
         imageUrl: "test.jpg",
         content: "test content",
+        user: undefined,
       }),
       Post.Create({
         id: 2,
         title: "test2",
         imageUrl: "test2.jpg",
         content: "test2 content",
+        user: undefined,
       }),
     ];
     const getPostsQuery = jest.fn().mockReturnValue(

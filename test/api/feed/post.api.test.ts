@@ -4,15 +4,16 @@ import { createConnection, getConnection } from "typeorm";
 import { Post } from "../../../src/entities/feed/post.model";
 import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
 import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
+import { User } from "../../../src/entities/user/user.model";
 
 const createDb = () =>
   createConnection({
     type: "sqlite",
     database: ":memory:",
     dropSchema: true,
-    entities: [Post],
+    entities: [Post, User],
     synchronize: true,
-    logging: true,
+    logging: false,
     migrations: ["test/migrations/**/*.ts"],
   });
 
