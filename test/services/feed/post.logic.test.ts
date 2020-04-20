@@ -1,23 +1,16 @@
 import { getPostsLogicFactory } from "../../../src/services/feed/post.logic";
 import { Post } from "../../../src/entities/feed/post.model";
+import { getPostMock } from "../../mocks/feed/post.mock";
 
 describe("get post logic", () => {
   it("should return a list of posts dtos", async () => {
     //Arrange
     const list = [
-      Post.Create({
+      getPostMock({
         id: 1,
-        title: "test",
-        imageUrl: "test.jpg",
-        content: "test content",
-        user: undefined,
       }),
-      Post.Create({
+      getPostMock({
         id: 2,
-        title: "test2",
-        imageUrl: "test2.jpg",
-        content: "test2 content",
-        user: undefined,
       }),
     ];
     const getPostsQuery = jest.fn().mockReturnValue(

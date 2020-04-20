@@ -5,6 +5,7 @@ import { Post } from "../../../src/entities/feed/post.model";
 import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
 import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
 import { User } from "../../../src/entities/user/user.model";
+import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
 
 const createDb = () =>
   createConnection({
@@ -37,13 +38,7 @@ describe("Create post", () => {
   it("should save the resource and return a successful message including the saved objects", async () => {
     await request(app)
       .post("/feed/post")
-      .send(
-        new PostCreateDto({
-          title: "four",
-          imageUrl: "four.jpg",
-          content: "four content",
-        }),
-      )
+      .send(getPostCreateDtoMock())
       .then((res) => {
         expect(res.status).toEqual(201);
         expect(res.body).toHaveProperty("message");
@@ -56,7 +51,7 @@ describe("Create post", () => {
     await request(app)
       .post("/feed/post")
       .send(
-        new PostCreateDto({
+        getPostCreateDtoMock({
           title: "fo",
           content: "four                   ",
           imageUrl: "<s></s>",
