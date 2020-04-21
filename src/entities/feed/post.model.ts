@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne } from "typeorm";
 import { User } from "../user/user.model";
 
 @Entity()
@@ -15,7 +15,7 @@ export class Post {
   @Column()
   content: string;
 
-  @ManyToMany(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.posts)
   user: User;
 
   static Create(params: Post): Post {
