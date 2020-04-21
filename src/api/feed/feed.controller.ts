@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Post } from "../../entities/feed/post.model";
-import { getPostsLogic } from "../../services/feed/post.logic.setup";
-import { PostShowDto } from "../../entities/feed/post.show.dto";
-import { UserShowDto } from "../../entities/user/user.show.dto";
+import { getPostsLogic, savePostLogic } from "../../services/feed/post.logic.setup";
+import { PostCreateDto } from "../../entities/feed/post.create.dto";
 
 export const getPosts = async (
   req: Request,
@@ -19,16 +18,9 @@ export const createPost = async (
   res: Response,
   next: NextFunction,
 ): Promise<Response<any>> => {
-  console.log(req.body);
+  const savedPost = await savePostLogic(new PostCreateDto(req.body));
   return res.status(201).json({
     message: "resource created",
-    post: new PostShowDto({
-      title: "four",
-      content: "four content",
-      user: new UserShowDto({
-        name: "sbn",
-        email: "sbn@mail.com",
-      }),
-    }),
+    post: savedPost,
   });
 };

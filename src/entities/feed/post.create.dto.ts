@@ -17,6 +17,11 @@ export class PostCreateDto {
   @IsNotEmpty()
   public readonly content: string;
 
+  @IsNotEmpty()
+  public readonly user: {
+    id: number;
+  };
+
   constructor(params?: Partial<PostCreateDto>) {
     Object.assign(this, params);
   }
