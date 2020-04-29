@@ -39,6 +39,7 @@ describe("Save post", () => {
     // Act
     await savePostLogicFactory(savePostQuery)(postCreateDto).then((savedPost) => {
       expect(savedPost).toBeDefined();
+      expect(savedPost).not.toHaveProperty("id");
     });
   });
 });
