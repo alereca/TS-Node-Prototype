@@ -1,13 +1,13 @@
 import { UserShowDto } from "../user/user.show.dto";
+import { Exclude, Expose, Type } from "class-transformer";
 
+@Exclude()
 export class PostShowDto {
-  public readonly title: string;
-  public readonly content: string;
-  public readonly user: UserShowDto;
-
-  constructor(params: PostShowDto) {
-    this.title = params.title;
-    this.content = params.content;
-    this.user = params.user;
-  }
+  @Expose()
+  title: string;
+  @Expose()
+  content: string;
+  @Expose()
+  @Type(() => UserShowDto)
+  user: UserShowDto;
 }
