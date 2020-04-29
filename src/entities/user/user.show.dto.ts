@@ -1,9 +1,9 @@
-export class UserShowDto {
-  public readonly name: string;
-  public readonly email: string;
+import { Exclude, Expose } from "class-transformer";
 
-  constructor(params: UserShowDto) {
-    this.name = params.name;
-    this.email = params.email;
-  }
+@Exclude()
+export class UserShowDto {
+  @Expose()
+  name: string;
+  @Expose()
+  email: string;
 }
