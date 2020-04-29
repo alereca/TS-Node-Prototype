@@ -32,14 +32,13 @@ describe("Save post", () => {
   it("should save post to db and return whether it was successful", async () => {
     // Arrange
     const postCreateDto = getPostCreateDtoMock();
-    const postToSave = getPostMock();
+    const savedPost = getPostMock();
     const savePostQuery = jest.fn().mockReturnValue(
-      new Promise<Post>((resolve) => resolve(postToSave)),
+      new Promise<Post>((resolve) => resolve(savedPost)),
     );
     // Act
     await savePostLogicFactory(savePostQuery)(postCreateDto).then((savedPost) => {
-      expect(savedPost).toBeDefined();
-      expect(savedPost).not.toHaveProperty("id");
+      expect(savedPost.id).toBeDefined();
     });
   });
 });

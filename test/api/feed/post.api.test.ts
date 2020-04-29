@@ -29,8 +29,8 @@ describe("Create post", () => {
         expect(res.status).toEqual(201);
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
-        expect(res.body.post.title).toBeDefined();
-        expect(res.body.post.user.name).toBeDefined();
+        expect(res.body.post.id).toBeDefined();
+        expect(res.body.post.imageUrl).not.toBeDefined();
       });
   });
 
