@@ -10,3 +10,5 @@ coverage
 # OS metadata
 .DS_Store
 Thumbs.db
+# File DB
+*.sqlite
