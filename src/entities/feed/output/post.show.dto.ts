@@ -1,4 +1,4 @@
-import { UserShowDto } from "../user/user.show.dto";
+import { UserShowDto } from "../../user/output/user.show.dto";
 import { Exclude, Expose, Type } from "class-transformer";
 
 @Exclude()

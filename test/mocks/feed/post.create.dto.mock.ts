@@ -1,4 +1,4 @@
-import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
+import { PostCreateDto } from "../../../src/entities/feed/input/post.create.dto";
 
 const getDefault = (): PostCreateDto => ({
   title: "five",

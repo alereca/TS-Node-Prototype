@@ -1,7 +1,8 @@
 import { getQueryFunc, saveQueryFunc } from "../../utils/common/common.query.interface";
 import { Post } from "../../entities/feed/post.model";
-import { PostShowDto } from "../../entities/feed/post.show.dto";
-import { PostCreateDto } from "../../entities/feed/post.create.dto";
+import { PostShowDto } from "../../entities/feed/output/post.show.dto";
+import { PostCreateDto } from "../../entities/feed/input/post.create.dto";
+import { PostSavedDto } from "../../entities/feed/output/post.saved.dto";
 import { plainToClass } from "class-transformer";
 
 export const getPostsLogicFactory = (getFromRepo: getQueryFunc) => (): Promise<
@@ -13,5 +14,5 @@ export const getPostsLogicFactory = (getFromRepo: getQueryFunc) => (): Promise<
 
 export const savePostLogicFactory = (save: saveQueryFunc) => (
   value: PostCreateDto,
-): Promise<PostShowDto> =>
-  save(Post, value).then((post) => plainToClass(PostShowDto, post));
+): Promise<PostSavedDto> =>
+  save(Post, value).then((post) => plainToClass(PostSavedDto, post));
