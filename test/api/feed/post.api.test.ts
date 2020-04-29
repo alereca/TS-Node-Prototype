@@ -29,8 +29,8 @@ describe("Create post", () => {
         expect(res.status).toEqual(201);
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
-        expect(res.body).toHaveProperty("post");
-        expect(res.body.post).toHaveProperty("user");
+        expect(res.body.post.title).toBeDefined();
+        expect(res.body.post.user.name).toBeDefined();
       });
   });
 
@@ -45,7 +45,7 @@ describe("Create post", () => {
         }),
       )
       .then((res) => {
-        expect(res.status).toEqual(430);
+        expect(res.status).toEqual(400);
         expect(res.body.status).toEqual("failed");
         expect(res.body.error).toHaveProperty("original");
         expect(res.body.error.details).toHaveLength(2);
