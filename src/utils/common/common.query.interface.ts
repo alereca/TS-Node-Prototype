@@ -1,1 +1,9 @@
-export type getFunc = <T>(type: { new (...args: any[]): T }) => Promise<T[]>;
+export type getQueryFunc = <T>(
+  type: { new (...args: any[]): T },
+  include: string[],
+) => Promise<T[]>;
+
+export type saveQueryFunc = <R, T>(
+  type: { new (...args: any[]): T },
+  value: R,
+) => Promise<T>;

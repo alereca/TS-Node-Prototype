@@ -1,23 +1,32 @@
 import { Length, IsNotEmpty } from "class-validator";
 import { Escape, Trim } from "@neuralegion/class-sanitizer";
+import { Exclude, Expose } from "class-transformer";
 
+@Exclude()
 export class PostCreateDto {
+  @Expose()
   @Trim()
   @Escape()
   @Length(3)
   @IsNotEmpty()
-  public readonly title: string;
+  title: string;
+
+  @Expose()
   @Trim()
   @Escape()
   @IsNotEmpty()
-  public readonly imageUrl: string;
+  imageUrl: string;
+
+  @Expose()
   @Trim()
   @Escape()
   @Length(6)
   @IsNotEmpty()
-  public readonly content: string;
+  content: string;
 
-  constructor(params?: Partial<PostCreateDto>) {
-    Object.assign(this, params);
-  }
+  @Expose()
+  @IsNotEmpty()
+  user: {
+    id: number;
+  };
 }

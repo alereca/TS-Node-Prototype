@@ -1,20 +1,8 @@
 import app from "../../../src/server";
 import request from "supertest";
-import { createConnection, getConnection } from "typeorm";
-import { Post } from "../../../src/entities/feed/post.model";
-import { PostCreateDto } from "../../../src/entities/feed/post.create.dto";
-import { PostShowDto } from "../../../src/entities/feed/post.show.dto";
-
-const createDb = () =>
-  createConnection({
-    type: "sqlite",
-    database: ":memory:",
-    dropSchema: true,
-    entities: [Post],
-    synchronize: true,
-    logging: true,
-    migrations: ["test/migrations/**/*.ts"],
-  });
+import { getConnection } from "typeorm";
+import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
+import { createDb } from "../../database/startup/startup.test.db";
 
 beforeEach(async () => {
   const connection = await createDb();
@@ -36,18 +24,13 @@ describe("Create post", () => {
   it("should save the resource and return a successful message including the saved objects", async () => {
     await request(app)
       .post("/feed/post")
-      .send(
-        new PostCreateDto({
-          title: "four",
-          imageUrl: "four.jpg",
-          content: "four content",
-        }),
-      )
+      .send(getPostCreateDtoMock())
       .then((res) => {
         expect(res.status).toEqual(201);
         expect(res.body).toHaveProperty("message");
         expect(res.body.message).toEqual("resource created");
-        expect(res.body).toHaveProperty("post");
+        expect(res.body.post.id).toBeDefined();
+        expect(res.body.post.imageUrl).not.toBeDefined();
       });
   });
 
@@ -55,14 +38,14 @@ describe("Create post", () => {
     await request(app)
       .post("/feed/post")
       .send(
-        new PostCreateDto({
+        getPostCreateDtoMock({
           title: "fo",
           content: "four                   ",
           imageUrl: "<s></s>",
         }),
       )
       .then((res) => {
-        expect(res.status).toEqual(430);
+        expect(res.status).toEqual(400);
         expect(res.body.status).toEqual("failed");
         expect(res.body.error).toHaveProperty("original");
         expect(res.body.error.details).toHaveLength(2);

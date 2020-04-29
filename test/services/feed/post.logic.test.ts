@@ -1,21 +1,20 @@
-import { getPostsLogicFactory } from "../../../src/services/feed/post.logic";
+import {
+  getPostsLogicFactory,
+  savePostLogicFactory,
+} from "../../../src/services/feed/post.logic";
 import { Post } from "../../../src/entities/feed/post.model";
+import { getPostMock } from "../../mocks/feed/post.mock";
+import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
 
 describe("get post logic", () => {
   it("should return a list of posts dtos", async () => {
     //Arrange
     const list = [
-      Post.Create({
+      getPostMock({
         id: 1,
-        title: "test",
-        imageUrl: "test.jpg",
-        content: "test content",
       }),
-      Post.Create({
+      getPostMock({
         id: 2,
-        title: "test2",
-        imageUrl: "test2.jpg",
-        content: "test2 content",
       }),
     ];
     const getPostsQuery = jest.fn().mockReturnValue(
@@ -29,9 +28,17 @@ describe("get post logic", () => {
   });
 });
 
-/* describe("Save post", () => {
+describe("Save post", () => {
   it("should save post to db and return whether it was successful", async () => {
-    const savePostQuery = (post: PostCreateDto):void => {};
-    await savePostLogicFactory(savePostQuery)();
+    // Arrange
+    const postCreateDto = getPostCreateDtoMock();
+    const savedPost = getPostMock();
+    const savePostQuery = jest.fn().mockReturnValue(
+      new Promise<Post>((resolve) => resolve(savedPost)),
+    );
+    // Act
+    await savePostLogicFactory(savePostQuery)(postCreateDto).then((savedPost) => {
+      expect(savedPost.id).toBeDefined();
+    });
   });
-});  */
+});
