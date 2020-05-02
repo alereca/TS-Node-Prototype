@@ -1,17 +1,19 @@
 import { getQueryFunc, saveQueryFunc } from "./common.query.interface";
 import { getRepository } from "typeorm";
-import { TaskEither, tryCatch } from "fp-ts/lib/TaskEither";
+import { Result, ok, err } from "neverthrow";
 
-export const getFromRepoQuery: getQueryFunc = <T>(
+export const getFromRepoQuery: getQueryFunc = async <T>(
   type: {
     new (...args: any[]): T;
   },
   include: string[],
-): TaskEither<Error, T[]> =>
-  tryCatch(
-    () => getRepository(type).find({ relations: include }),
-    (reason) => new Error(String(reason)),
-  );
+): Promise<Result<T[], Error>> => {
+  try {
+    return ok(await getRepository(type).find({ relations: include }));
+  } catch (error) {
+    return err(new Error(error));
+  }
+};
 
 export const saveQuery: saveQueryFunc = <R, T>(
   type: {

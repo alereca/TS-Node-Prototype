@@ -1,9 +1,9 @@
-import { TaskEither } from "fp-ts/lib/TaskEither";
+import { Result } from "neverthrow";
 
 export type getQueryFunc = <T>(
   type: { new (...args: any[]): T },
   include: string[],
-) => TaskEither<Error, T[]>;
+) => Promise<Result<T[], Error>>;
 
 export type saveQueryFunc = <R, T>(
   type: { new (...args: any[]): T },

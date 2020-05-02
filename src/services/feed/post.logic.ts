@@ -5,15 +5,13 @@ import { PostCreateDto } from "../../entities/feed/input/post.create.dto";
 import { PostSavedDto } from "../../entities/feed/output/post.saved.dto";
 import { plainToClass } from "class-transformer";
 import { TaskEither } from "fp-ts/lib/TaskEither";
-import { pipe } from "fp-ts/lib/pipeable";
-import { chain } from "fp-ts/lib/Option";
+import { Result } from "neverthrow";
 
-export const getPostsLogicFactory = (getFromRepo: getQueryFunc) => (): TaskEither<
-  Error,
-  PostShowDto[]
+export const getPostsLogicFactory = (getFromRepo: getQueryFunc) => (): Promise<
+  Result<PostShowDto[], Error>
 > =>
-  pipe(chain((posts) => posts.map((post) => plainToClass(PostShowDto, post))))(
-    getFromRepo(Post, ["user"]),
+  getFromRepo(Post, ["user"]).then((posts) =>
+    posts.map((post) => plainToClass(PostShowDto, post)),
   );
 
 export const savePostLogicFactory = (save: saveQueryFunc) => (
