@@ -1,7 +1,9 @@
+import { TaskEither } from "fp-ts/lib/TaskEither";
+
 export type getQueryFunc = <T>(
   type: { new (...args: any[]): T },
   include: string[],
-) => Promise<T[]>;
+) => TaskEither<Error, T[]>;
 
 export type saveQueryFunc = <R, T>(
   type: { new (...args: any[]): T },
