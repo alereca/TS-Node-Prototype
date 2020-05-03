@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, getRepository, getConnection } from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  getRepository,
+  getConnection,
+} from "typeorm";
 import { Post } from "../entities/feed/post.model";
 import { User } from "../entities/user/user.model";
 

@@ -9,7 +9,9 @@ const getDefault = (): PostCreateDto => ({
   },
 });
 
-export const getPostCreateDtoMock = (pc?: Partial<PostCreateDto>): PostCreateDto => ({
+export const getPostCreateDtoMock = (
+  pc?: Partial<PostCreateDto>,
+): PostCreateDto => ({
   ...getDefault(),
   ...pc,
 });

@@ -1,4 +1,7 @@
-import { getQueryFunc, saveQueryFunc } from "../../utils/common/common.query.interface";
+import {
+  getQueryFunc,
+  saveQueryFunc,
+} from "../../utils/common/common.query.interface";
 import { Post } from "../../entities/feed/post.model";
 import { PostShowDto } from "../../entities/feed/output/post.show.dto";
 import { PostCreateDto } from "../../entities/feed/input/post.create.dto";
@@ -10,8 +13,8 @@ import { Result } from "neverthrow";
 export const getPostsLogicFactory = (getFromRepo: getQueryFunc) => (): Promise<
   Result<PostShowDto[], Error>
 > =>
-  getFromRepo(Post, ["user"]).then((posts) =>
-    posts.map((post) => plainToClass(PostShowDto, post)),
+  getFromRepo(Post, ["user"]).then((result) =>
+    result.map((posts) => posts.map((post) => plainToClass(PostShowDto, post))),
   );
 
 export const savePostLogicFactory = (save: saveQueryFunc) => (
