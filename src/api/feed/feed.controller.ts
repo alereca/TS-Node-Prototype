@@ -8,14 +8,14 @@ import { PostCreateDto } from "../../entities/feed/input/post.create.dto";
 import { plainToClass } from "class-transformer";
 import { PostShowDto } from "src/entities/feed/output/post.show.dto";
 import { PostSavedDto } from "src/entities/feed/output/post.saved.dto";
-import { TaskEither, fold } from "fp-ts/lib/TaskEither";
+import * as TE from "fp-ts/lib/TaskEither";
 
 export const getPosts = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) =>
-  fold<Error, PostShowDto[]>(
+  TE.fold(
     (err) => next(err),
     (posts) => res.status(200).json(posts),
   )(getPostsLogic);
