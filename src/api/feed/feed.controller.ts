@@ -9,16 +9,19 @@ import { plainToClass } from "class-transformer";
 import { PostShowDto } from "src/entities/feed/output/post.show.dto";
 import { PostSavedDto } from "src/entities/feed/output/post.saved.dto";
 import * as TE from "fp-ts/lib/TaskEither";
+import { pipe } from "fp-ts/lib/pipeable";
 
-export const getPosts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) =>
-  TE.fold(
+export const getPosts = (req: Request, res: Response, next: NextFunction) =>
+  pipe(
+    getPostsLogic,
+    TE.map((posts) => res.status(200).json(posts)),
+    TE.mapLeft((err) => next(err)),
+  );
+
+/* TE.fold(
     (err) => next(err),
     (posts) => res.status(200).json(posts),
-  )(getPostsLogic);
+  )(getPostsLogic); */
 
 //res.status(200).json(posts);
 
