@@ -5,7 +5,7 @@ import {
 import { Post } from "../../../src/entities/feed/post.model";
 import { getPostMock } from "../../mocks/feed/post.mock";
 import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
-import { Result, ok } from "neverthrow";
+import { Result, ok, err } from "neverthrow";
 
 describe("get post logic", () => {
   it("should return a list of posts dtos", async () => {
@@ -20,15 +20,17 @@ describe("get post logic", () => {
     ];
     const getPostsQuery = jest.fn().mockReturnValue(
       new Promise<Result<Post[], Error>>((resolve, reject) =>
-        resolve(ok(list)),
+        resolve(err(new Error("puto"))),
       ),
     );
     //Act
     await getPostsLogicFactory(getPostsQuery)().then((result) => {
-      result.map((posts) => {
-        expect(posts).toHaveLength(2);
-        expect(posts[0]).not.toHaveProperty("id");
-      });
+      result
+        .map((posts) => {
+          expect(posts).toHaveLength(2);
+          expect(posts[0]).not.toHaveProperty("id");
+        })
+        .mapErr((err) => expect(err).not.toBeDefined());
     });
   });
 });
