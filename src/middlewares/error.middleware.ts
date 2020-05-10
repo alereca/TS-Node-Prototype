@@ -17,7 +17,7 @@ export const errorHandlingMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => {
+): void => {
   const status = 500;
   const message = "Something went wrong";
 

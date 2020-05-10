@@ -1,4 +1,7 @@
-import { getQueryFunc, saveQueryFunc } from "../../utils/common/common.query.interface";
+import {
+  getQueryFunc,
+  saveQueryFunc,
+} from "../../utils/common/common.query.interface";
 import { Post } from "../../entities/feed/post.model";
 import { PostShowDto } from "../../entities/feed/output/post.show.dto";
 import { PostCreateDto } from "../../entities/feed/input/post.create.dto";
