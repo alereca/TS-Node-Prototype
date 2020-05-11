@@ -1,9 +1,8 @@
-import winston, { createLogger, transports } from "winston";
+import { createLogger, transports, format } from "winston";
 
 const consoleOptions: transports.ConsoleTransportOptions = {
-  level: "info",
   handleExceptions: true,
-  format: winston.format.simple(),
+  format: format.combine(format.json(), format.colorize()),
 };
 
 export const logger = createLogger({

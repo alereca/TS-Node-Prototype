@@ -2,6 +2,7 @@ import express from "express";
 import feedRoutes from "./api/feed/feed.route";
 import bodyParser from "body-parser";
 import { errorHandlingMiddleware } from "./middlewares/error.middleware";
+import { logger } from "./logger";
 
 const app = express();
 
@@ -11,6 +12,6 @@ app.use(bodyParser.json());
 
 app.use("/feed", feedRoutes);
 
-app.use(errorHandlingMiddleware);
+app.use(errorHandlingMiddleware(logger));
 
 export default app;

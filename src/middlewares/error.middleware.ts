@@ -1,17 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "src/utils/errors/errors";
-import { logger } from "../logger";
+import { Logger } from "winston";
 
-export const errorHandlingMiddleware = (
+export const errorHandlingMiddleware = (logger: Logger) => (
   err: AppError,
   req: Request,
   res: Response,
   next: NextFunction,
 ): void => {
-  // TO-DO: log full stack trace
-  logger.log({
-    level: "info",
-    message: `${err.name} => ${err.message}\n ${err.stack}`,
+  logger.log(err.logLevel, err.message, {
+    type: err.name,
+    stack: err.stack,
   });
 
   res.status(err.status).json({ message: err.displayMessage });
