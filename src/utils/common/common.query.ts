@@ -1,5 +1,6 @@
 import { getQueryFunc, saveQueryFunc } from "./common.query.interface";
 import { getRepository } from "typeorm";
+import { DbError } from "../errors/errors";
 
 export const getFromRepoQuery: getQueryFunc = <T>(
   type: {
@@ -13,4 +14,9 @@ export const saveQuery: saveQueryFunc = <R, T>(
     new (...args: any[]): T;
   },
   value: R,
-): Promise<T> => getRepository(type).save(getRepository(type).create(value));
+): Promise<T> =>
+  getRepository(type)
+    .save(getRepository(type).create(value))
+    .catch((err: Error) => {
+      throw DbError(err.message, err.stack);
+    });

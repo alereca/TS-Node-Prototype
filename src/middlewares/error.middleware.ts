@@ -1,27 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import winston, { createLogger, transports } from "winston";
-
-const consoleOptions: transports.ConsoleTransportOptions = {
-  level: "info",
-  handleExceptions: true,
-  format: winston.format.simple(),
-};
-
-const logger = createLogger({
-  transports: [new transports.Console(consoleOptions)],
-  exitOnError: false,
-});
+import { AppError } from "src/utils/errors/errors";
+import { logger } from "../logger";
 
 export const errorHandlingMiddleware = (
-  err: Error,
+  err: AppError,
   req: Request,
   res: Response,
   next: NextFunction,
 ): void => {
-  const status = 500;
-  const message = "Something went wrong";
+  // TO-DO: log full stack trace
+  logger.log({
+    level: "info",
+    message: `${err.name} => ${err.message}\n ${err.stack}`,
+  });
 
-  logger.log({ level: "info", message: err.message });
-
-  res.status(status).json({ message: message });
+  res.status(err.status).json({ message: err.displayMessage });
 };

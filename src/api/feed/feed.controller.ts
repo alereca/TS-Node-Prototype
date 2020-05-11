@@ -28,5 +28,5 @@ export const createPost = (
         post: savedPost,
       }),
     )
-    .catch((err) => next(new Error(String(err))));
+    .catch((err) => next(err));
 };
