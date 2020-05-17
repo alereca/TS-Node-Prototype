@@ -38,7 +38,7 @@ export class AppError extends Error {
   }
 }
 
-const displayFatalError = (code: number) =>
+const displayFatalError = (code: number): string =>
   `Something went wrong. Error code: ${code}. Please contact support`;
 
 export const DbError = (message: string, stack?: string): AppError =>
