@@ -1,8 +1,8 @@
-import { getQueryFunc, saveQueryFunc } from "./common.query.interface";
+import * as queryTypes from "./common.query.interface";
 import { getRepository } from "typeorm";
 import * as Er from "../errors/errors";
 
-export const getFromRepoQuery: getQueryFunc = <T>(
+export const getFromRepoQuery: queryTypes.getQueryFunc = <T>(
   type: {
     new (...args: any[]): T;
   },
@@ -14,7 +14,7 @@ export const getFromRepoQuery: getQueryFunc = <T>(
       throw Er.DbError(err.message, err.stack);
     });
 
-export const saveQuery: saveQueryFunc = <R, T>(
+export const saveQuery: queryTypes.saveQueryFunc = <R, T>(
   type: {
     new (...args: any[]): T;
   },
