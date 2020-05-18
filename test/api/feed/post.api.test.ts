@@ -1,7 +1,7 @@
 import app from "../../../src/server";
 import request from "supertest";
 import { getConnection } from "typeorm";
-import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
+import * as inputMocks from "../../mocks/feed/post.input.dto.mock";
 import { createDb } from "../../database/startup/startup.test.db";
 
 beforeEach(async () => {
@@ -48,10 +48,11 @@ describe("Get one post", () => {
 });
 
 describe("Create post", () => {
+  const path = "/feed/post";
   it("should save the resource and return a successful message including the saved objects", () => {
     return request(app)
-      .post("/feed/post")
-      .send(getPostCreateDtoMock())
+      .post(path)
+      .send(inputMocks.getPostCreateDtoMock())
       .then((res) => {
         expect(res.status).toEqual(201);
         expect(res.body).toHaveProperty("message");
@@ -63,9 +64,9 @@ describe("Create post", () => {
 
   it("should return a validation error if some input in the request body is invalid", () => {
     return request(app)
-      .post("/feed/post")
+      .post(path)
       .send(
-        getPostCreateDtoMock({
+        inputMocks.getPostCreateDtoMock({
           title: "fo",
           content: "four                   ",
           imageUrl: "<s></s>",
@@ -76,6 +77,21 @@ describe("Create post", () => {
         expect(res.body.status).toEqual("failed");
         expect(res.body.error).toHaveProperty("original");
         expect(res.body.error.details).toHaveLength(2);
+      });
+  });
+
+  it("should return a fatal error if a foreign key constrain was triggered", () => {
+    return request(app)
+      .post(path)
+      .send(
+        inputMocks.getPostCreateDtoMock({
+          user: {
+            id: 4,
+          },
+        }),
+      )
+      .then((res) => {
+        expect(res.status).toEqual(500);
       });
   });
 });

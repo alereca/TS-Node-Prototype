@@ -1,6 +1,6 @@
 import { PostCreateDto } from "../../../src/entities/feed/input/post.create.dto";
 
-const getDefault = (): PostCreateDto => ({
+const getDefaultCreateDto = (): PostCreateDto => ({
   title: "five",
   imageUrl: "five.jpg",
   content: "five content",
@@ -12,6 +12,6 @@ const getDefault = (): PostCreateDto => ({
 export const getPostCreateDtoMock = (
   pc?: Partial<PostCreateDto>,
 ): PostCreateDto => ({
-  ...getDefault(),
+  ...getDefaultCreateDto(),
   ...pc,
 });

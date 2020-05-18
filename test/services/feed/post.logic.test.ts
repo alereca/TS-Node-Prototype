@@ -1,7 +1,7 @@
 import * as services from "../../../src/services/feed/post.logic";
 import { Post } from "../../../src/entities/feed/post.model";
 import { getPostMock } from "../../mocks/feed/post.mock";
-import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
+import * as inputMocks from "../../mocks/feed/post.input.dto.mock";
 
 describe("get post logic", () => {
   it("should return a list of posts dtos", async () => {
@@ -44,7 +44,7 @@ describe("Get one post", () => {
 describe("Save post", () => {
   it("should save post to db and return whether it was successful", async () => {
     // Arrange
-    const postCreateDto = getPostCreateDtoMock();
+    const postCreateDto = inputMocks.getPostCreateDtoMock();
     const savedPost = getPostMock();
     const savePostQuery = jest.fn().mockReturnValue(
       new Promise<Post>((resolve) => resolve(savedPost)),
