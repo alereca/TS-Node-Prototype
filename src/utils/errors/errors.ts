@@ -16,7 +16,6 @@ enum LogLevel {
 
 export class AppError extends Error {
   status: number;
-  message: string;
   displayMessage: string;
   logLevel: LogLevel;
 

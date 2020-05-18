@@ -2,7 +2,7 @@ import { createLogger, transports, format } from "winston";
 
 const consoleOptions: transports.ConsoleTransportOptions = {
   handleExceptions: true,
-  format: format.combine(format.json(), format.colorize()),
+  format: format.json(),
 };
 
 export const logger = createLogger({
