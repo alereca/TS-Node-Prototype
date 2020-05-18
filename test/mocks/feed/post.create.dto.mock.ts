@@ -5,11 +5,13 @@ const getDefault = (): PostCreateDto => ({
   imageUrl: "five.jpg",
   content: "five content",
   user: {
-    id: 1,
+    id: 3,
   },
 });
 
-export const getPostCreateDtoMock = (pc?: Partial<PostCreateDto>): PostCreateDto => ({
+export const getPostCreateDtoMock = (
+  pc?: Partial<PostCreateDto>,
+): PostCreateDto => ({
   ...getDefault(),
   ...pc,
 });

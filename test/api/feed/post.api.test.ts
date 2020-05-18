@@ -10,8 +10,8 @@ beforeEach(async () => {
 });
 
 describe("Get posts", () => {
-  it("should get every posts in db", async () => {
-    await request(app)
+  it("should get every posts in db", () => {
+    return request(app)
       .get("/feed/posts")
       .then((res) => {
         expect(res.status).toEqual(200);
@@ -21,8 +21,8 @@ describe("Get posts", () => {
 });
 
 describe("Create post", () => {
-  it("should save the resource and return a successful message including the saved objects", async () => {
-    await request(app)
+  it("should save the resource and return a successful message including the saved objects", () => {
+    return request(app)
       .post("/feed/post")
       .send(getPostCreateDtoMock())
       .then((res) => {
@@ -34,8 +34,8 @@ describe("Create post", () => {
       });
   });
 
-  it("should return a validation error if some input in the request body is invalid", async () => {
-    await request(app)
+  it("should return a validation error if some input in the request body is invalid", () => {
+    return request(app)
       .post("/feed/post")
       .send(
         getPostCreateDtoMock({
