@@ -12,6 +12,13 @@ export const getPostsLogicFactory = (
     posts.map((post) => plainToClass(PostShowDto, post)),
   );
 
+export const getPostLogicFactory = (
+  getOneFromRepo: queryTypes.getOneQueryFunc,
+) => (id: number): Promise<PostShowDto> =>
+  getOneFromRepo(Post, ["user"], id).then((post) =>
+    plainToClass(PostShowDto, post),
+  );
+
 export const savePostLogicFactory = (save: queryTypes.saveQueryFunc) => (
   value: PostCreateDto,
 ): Promise<PostSavedDto> =>

@@ -1,7 +1,4 @@
-import {
-  getPostsLogicFactory,
-  savePostLogicFactory,
-} from "../../../src/services/feed/post.logic";
+import * as services from "../../../src/services/feed/post.logic";
 import { Post } from "../../../src/entities/feed/post.model";
 import { getPostMock } from "../../mocks/feed/post.mock";
 import { getPostCreateDtoMock } from "../../mocks/feed/post.create.dto.mock";
@@ -21,10 +18,26 @@ describe("get post logic", () => {
       new Promise<Post[]>((resolve) => resolve(list)),
     );
     //Act
-    await getPostsLogicFactory(getPostsQuery)().then((posts) => {
-      expect(posts).toHaveLength(2);
-      expect(posts[0]).not.toHaveProperty("id");
-    });
+    await services
+      .getPostsLogicFactory(getPostsQuery)()
+      .then((posts) => {
+        expect(posts).toHaveLength(2);
+        expect(posts[0]).not.toHaveProperty("id");
+      });
+  });
+});
+
+describe("Get one post", () => {
+  it("should return the post that matches that id", async () => {
+    const id = 1;
+    const post = getPostMock();
+    const getOneQuery = jest.fn().mockReturnValue(
+      new Promise<Post>((resolve) => resolve(post)),
+    );
+
+    await services
+      .getPostLogicFactory(getOneQuery)(id)
+      .then((post) => expect(post).not.toHaveProperty("id"));
   });
 });
 
@@ -37,8 +50,10 @@ describe("Save post", () => {
       new Promise<Post>((resolve) => resolve(savedPost)),
     );
     // Act
-    await savePostLogicFactory(savePostQuery)(postCreateDto).then((savedPost) => {
-      expect(savedPost.id).toBeDefined();
-    });
+    await services
+      .savePostLogicFactory(savePostQuery)(postCreateDto)
+      .then((savedPost) => {
+        expect(savedPost.id).toBeDefined();
+      });
   });
 });

@@ -7,6 +7,7 @@ import { sanitizeWith } from "../../middlewares/sanitization.middleware";
 const router = Router();
 
 router.get("/posts", feedActions.getPosts);
+router.get("/posts/:id", feedActions.getPost);
 router.post(
   "/post",
   [sanitizeWith(PostCreateDto), validateWith(PostCreateDto, "body")],

@@ -9,6 +9,10 @@ beforeEach(async () => {
   await connection.runMigrations();
 });
 
+afterEach(() => {
+  return getConnection().close();
+});
+
 describe("Get posts", () => {
   it("should get every posts in db", () => {
     return request(app)
@@ -16,6 +20,29 @@ describe("Get posts", () => {
       .then((res) => {
         expect(res.status).toEqual(200);
         expect(res.body).toHaveLength(3);
+      });
+  });
+});
+
+describe("Get one post", () => {
+  it("should return the post that has that id", () => {
+    const id = 1;
+    return request(app)
+      .get(`/feed/posts/${id}`)
+      .then((res) => {
+        expect(res.status).toEqual(200);
+        expect(res.body.title).toEqual("one");
+        expect(res.body.user.name).toEqual("someone");
+      });
+  });
+
+  it("should return not found if id didn't match with any post", () => {
+    const id = 5;
+    return request(app)
+      .get(`/feed/posts/${id}`)
+      .then((res) => {
+        expect(res.status).toEqual(404);
+        expect(res.body.message).toEqual(`Item ${id} not found`);
       });
   });
 });
@@ -51,8 +78,4 @@ describe("Create post", () => {
         expect(res.body.error.details).toHaveLength(2);
       });
   });
-});
-
-afterEach(() => {
-  return getConnection().close();
 });

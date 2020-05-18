@@ -14,6 +14,17 @@ export const getPosts = (
     .catch((err) => next(err));
 };
 
+export const getPost = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
+  feedServices
+    .getPostLogic(Number(req.params.id))
+    .then((post) => res.status(200).json(post))
+    .catch((err) => next(err));
+};
+
 export const createPost = (
   req: Request,
   res: Response,

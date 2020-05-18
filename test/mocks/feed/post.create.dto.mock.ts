@@ -5,7 +5,7 @@ const getDefault = (): PostCreateDto => ({
   imageUrl: "five.jpg",
   content: "five content",
   user: {
-    id: 3,
+    id: 1,
   },
 });
 
