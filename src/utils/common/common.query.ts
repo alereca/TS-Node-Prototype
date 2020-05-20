@@ -14,26 +14,22 @@ export const getFromRepoQuery: queryTypes.getQueryFunc = <T>(
       throw Er.DbError(err.message, err.stack);
     });
 
-export const getOneFromRepoQuery: queryTypes.getOneQueryFunc = async <T>(
+export const getOneFromRepoQuery: queryTypes.getOneQueryFunc = <T>(
   type: { new (...args: any[]): T },
   include: string[],
   id: number,
-): Promise<T> => {
-  try {
-    const post = await getRepository(type).findOne(id, { relations: include });
-
-    if (post == undefined) {
-      throw Er.NotFoundError(id);
-    }
-
-    return post;
-  } catch (err) {
-    if (!(err instanceof Er.AppError)) {
+): Promise<T> =>
+  getRepository(type)
+    .findOne(id, { relations: include })
+    .catch((err) => {
       throw Er.DbError(err.message, err.stack);
-    }
-    throw err;
-  }
-};
+    })
+    .then((post) => {
+      if (post === undefined) {
+        throw Er.NotFoundError(id);
+      }
+      return post;
+    });
 
 export const saveQuery: queryTypes.saveQueryFunc = <R, T>(
   type: {

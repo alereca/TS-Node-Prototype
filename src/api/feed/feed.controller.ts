@@ -14,7 +14,7 @@ export const getPosts = (
     .catch((err) => next(err));
 };
 
-export const getPost = (
+export const getOnePost = (
   req: Request,
   res: Response,
   next: NextFunction,
