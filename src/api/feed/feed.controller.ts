@@ -20,7 +20,7 @@ export const getOnePost = (
   next: NextFunction,
 ): void => {
   feedServices
-    .getPostLogic(Number(req.params.id))
+    .getOnePostLogic(Number(req.params.id))
     .then((post) => res.status(200).json(post))
     .catch((err) => next(err));
 };

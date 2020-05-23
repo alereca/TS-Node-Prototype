@@ -36,7 +36,7 @@ describe("Get one post", () => {
     );
 
     await services
-      .getPostLogicFactory(getOneQuery)(id)
+      .getOnePostLogicFactory(getOneQuery)(id)
       .then((post) => expect(post).not.toHaveProperty("id"));
   });
 });

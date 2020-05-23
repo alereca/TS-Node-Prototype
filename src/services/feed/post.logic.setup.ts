@@ -5,7 +5,7 @@ export const getPostsLogic = feedLogicFactories.getPostsLogicFactory(
   queries.getFromRepoQuery,
 );
 
-export const getPostLogic = feedLogicFactories.getPostLogicFactory(
+export const getOnePostLogic = feedLogicFactories.getOnePostLogicFactory(
   queries.getOneFromRepoQuery,
 );
 
