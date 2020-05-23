@@ -11,7 +11,18 @@ export const getPosts = (
   feedServices
     .getPostsLogic()
     .then((posts) => res.status(200).json(posts))
-    .catch((err) => next(new Error(String(err))));
+    .catch((err) => next(err));
+};
+
+export const getOnePost = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
+  feedServices
+    .getOnePostLogic(Number(req.params.id))
+    .then((post) => res.status(200).json(post))
+    .catch((err) => next(err));
 };
 
 export const createPost = (
